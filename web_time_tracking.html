@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Track User Time</title>
+  <style>
+    .button {
+      position: absolute;
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    #suggestions {
+      top: 100px;
+      left: 10px;
+      background-color: red;
+    }
+    #services {
+      top: 100px;
+      right: 10px;
+      background-color: green;
+    }
+    #conversations {
+      bottom: 10px;
+      left: 10px;
+      background-color: yellow;
+      color: black;
+    }
+    #exit {
+      bottom: 10px;
+      right: 10px;
+      background-color: blue;
+    }
+
+
+    .image-container {
+            background-image: url("E://Learn JavaScript/js_basics/pepper_robot.jpg");
+            width: 250px;
+            height: 550px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 250% ;
+    }
+
+  </style>
+</head>
+<body>
+  <h1 align="center"> Service Robot Functionalities: </h1>
+  <button id="suggestions" class="button">Suggestions</button>
+  <button id="services" class="button">Services</button>
+  <button id="conversations" class="button">Conversations</button>
+  <button id="exit" class="button">Exit</button>
+
+  <div class="image-container"></div>
+
+  <script>
+    let startTime, endTime;
+
+    window.onload = function() {
+      startTime = new Date();
+    };
+
+    document.getElementById('exit').onclick = function() {
+      endTime = new Date();
+      const timeSpent = endTime - startTime;
+      console.log('Time spent on page: ' + timeSpent + ' milliseconds');
+      
+      const data = 'Time spent on page: ' + timeSpent + ' milliseconds';
+      const blob = new Blob([data], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'time_spent.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      
+      window.close(); // Close the tab
+    };
+  </script>
+</body>
+</html>
